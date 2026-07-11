@@ -326,7 +326,7 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="logo">جهزني</div>
+    <div class="logo" data-t="logo_text">جهزني</div>
     <div class="nav-actions">
       <div class="lang-toggle">
         <button data-lang="ar-auto" class="active">AR</button>
@@ -528,7 +528,7 @@
 <script>
 const translations = {
   ar: {
-    nav_cta:"ابدأ دلوقتي", eyebrow:"مبني لسوق مصر والخليج",
+    logo_text:"جهزني", nav_cta:"ابدأ دلوقتي", eyebrow:"مبني لسوق مصر والخليج",
     h1:'جهّز نفسك للمقابلة اللي <span class="accent">هتغيّر مستقبلك</span>',
     hero_sub:"كورس مكثف بالفيديو، أسئلة حقيقية، وتقييم فوري — تبدأ النهاردة وتبقى جاهز قبل ما تدخل المقابلة.",
     hero_cta:"ابدأ دلوقتي ←", hero_note:"بدون التزام طويل. تقدر تلغي في أي وقت.",
@@ -563,7 +563,7 @@ const translations = {
     footer:"© 2026 جهزني. كل الحقوق محفوظة."
   },
   gulf: {
-    nav_cta:"ابدأ الحين", eyebrow:"مبني لسوق مصر والخليج",
+    logo_text:"جهزني", nav_cta:"ابدأ الحين", eyebrow:"مبني لسوق مصر والخليج",
     h1:'جهّز حالك للمقابلة اللي <span class="accent">بتغيّر مستقبلك</span>',
     hero_sub:"كورس فيديو مركّز، أسئلة حقيقية، وتقييم فوري — تبدأ اليوم وتصير جاهز قبل لا تدخل المقابلة.",
     hero_cta:"ابدأ الحين ←", hero_note:"بدون التزام طويل. تقدر تلغي بأي وقت.",
@@ -598,7 +598,7 @@ const translations = {
     footer:"© 2026 جهزني. جميع الحقوق محفوظة."
   },
   en: {
-    nav_cta:"Start Now", eyebrow:"Built for Egypt & Gulf job markets",
+    logo_text:"Jahzny", nav_cta:"Start Now", eyebrow:"Built for Egypt & Gulf job markets",
     h1:'Walk into your next interview like you\'ve done it <span class="accent">a hundred times</span>',
     hero_sub:"Focused video lessons, real questions, instant feedback — get interview-ready before the pressure hits.",
     hero_cta:"Start Now →", hero_note:"No long commitment. Cancel anytime.",
@@ -668,7 +668,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 
-// ---- Auto-detect dialect from ad campaign link ----
+// ---- Auto-detect dialect from ad campaign link, or device timezone as fallback ----
 // Ad links should use: jahzny.com/?region=eg  OR  jahzny.com/?region=gulf
 // The visitor only ever sees "AR" / "EN" — the dialect underneath is invisible.
 function detectInitialLang(){
@@ -676,7 +676,17 @@ function detectInitialLang(){
   const region = params.get('region');
   if(region === 'eg') return 'ar';
   if(region === 'gulf') return 'gulf';
-  // no region param (organic visit, shared link, etc.) — default to Egyptian Arabic
+
+  // No region param (organic/direct visit) — guess from the device's timezone.
+  // This needs no permissions and no network call, so it's instant and private.
+  try{
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const gulfZones = ['Asia/Riyadh','Asia/Kuwait','Asia/Dubai','Asia/Qatar','Asia/Bahrain','Asia/Muscat','Asia/Aden'];
+    if(gulfZones.includes(tz)) return 'gulf';
+    if(tz === 'Africa/Cairo') return 'ar';
+  }catch(e){}
+
+  // final fallback: default to Egyptian Arabic
   return 'ar';
 }
 
