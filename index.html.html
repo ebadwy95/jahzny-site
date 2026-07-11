@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جهزني — جهّز نفسك للمقابلة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0A121D;
+    --navy-900:#0F1B2D;
+    --navy-800:#16283D;
+    --navy-700:#1E3450;
+    --gold-500:#C9A227;
+    --gold-300:#E3C766;
+    --gold-glow: rgba(201,162,39,0.18);
+    --paper:#F5F2EA;
+    --paper-2:#EDE8DC;
+    --emerald:#1B7A6E;
+    --emerald-light:#2FA093;
+    --ink:#EDEAE2;
+    --ink-dim:#A9B1BE;
+    --ink-navy:#0F1B2D;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--navy-950);
+    color:var(--ink);
+    font-family:'IBM Plex Sans Arabic','Inter',sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  body.lang-en{
+    font-family:'Inter',sans-serif;
+  }
+
+  .display{
+    font-family:'Tajawal', sans-serif;
+    font-weight:900;
+  }
+  body.lang-en .display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-optical-sizing:auto;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,18,29,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(201,162,39,0.15);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; max-width:1120px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Tajawal',sans-serif; font-weight:900; font-size:22px;
+    color:var(--gold-300); letter-spacing:0.5px;
+  }
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .lang-toggle{
+    display:flex; border:1px solid rgba(201,162,39,0.35); border-radius:999px; overflow:hidden;
+    font-size:13px;
+  }
+  .lang-toggle button{
+    padding:7px 14px; background:transparent; color:var(--ink-dim); border:none; cursor:pointer;
+    font-family:inherit; transition:all .2s;
+  }
+  .lang-toggle button.active{background:var(--gold-500); color:var(--navy-950); font-weight:700;}
+  .nav-cta{
+    background:var(--gold-500); color:var(--navy-950); padding:9px 20px; border-radius:999px;
+    font-weight:700; font-size:14px; transition:transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--gold-glow);}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:90px 0 70px;
+    background:
+      radial-gradient(ellipse 900px 500px at 75% -10%, rgba(201,162,39,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 10% 100%, rgba(27,122,110,0.10), transparent 60%),
+      var(--navy-950);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--gold-300); font-size:13px; font-weight:700; letter-spacing:0.5px;
+    margin-bottom:20px; padding:6px 14px; border:1px solid rgba(201,162,39,0.3); border-radius:999px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--emerald-light);}
+  h1{
+    font-size:clamp(34px, 5vw, 54px); line-height:1.15; color:var(--ink); margin-bottom:22px;
+  }
+  h1 .accent{color:var(--gold-300);}
+  .hero-sub{
+    font-size:18px; color:var(--ink-dim); max-width:480px; margin-bottom:34px;
+  }
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(135deg, var(--gold-300), var(--gold-500));
+    color:var(--navy-950); font-weight:800; font-size:16px;
+    padding:16px 32px; border-radius:12px;
+    box-shadow:0 10px 30px var(--gold-glow);
+    transition:transform .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .hero-note{margin-top:16px; font-size:13px; color:var(--ink-dim);}
+
+  /* Readiness dial - signature element */
+  .dial-wrap{
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .dial{
+    width:320px; height:320px; position:relative;
+  }
+  .dial svg{width:100%; height:100%; transform:rotate(-90deg);}
+  .dial-track{fill:none; stroke:rgba(255,255,255,0.06); stroke-width:14;}
+  .dial-progress{
+    fill:none; stroke:url(#dialGradient); stroke-width:14; stroke-linecap:round;
+    stroke-dasharray:754; stroke-dashoffset:754;
+    animation:fillDial 2.2s cubic-bezier(.34,1.4,.64,1) 0.4s forwards;
+  }
+  @keyframes fillDial{ to{ stroke-dashoffset:68; } }
+  .dial-center{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+  }
+  .dial-percent{
+    font-family:'Tajawal',sans-serif; font-weight:900; font-size:52px; color:var(--gold-300);
+  }
+  body.lang-en .dial-percent{font-family:'Fraunces',serif;}
+  .dial-label{font-size:14px; color:var(--ink-dim); margin-top:4px;}
+  .dial-tag{
+    position:absolute; background:var(--navy-800); border:1px solid rgba(201,162,39,0.3);
+    padding:8px 16px; border-radius:999px; font-size:12px; font-weight:600; color:var(--emerald-light);
+    box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  }
+  .dial-tag.t1{top:8%; right:-4%;}
+  .dial-tag.t2{bottom:10%; left:-8%; color:var(--gold-300);}
+
+  /* ===== SECTION SHARED ===== */
+  section{padding:90px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .kicker{color:var(--emerald-light); font-weight:700; font-size:13px; letter-spacing:0.8px; margin-bottom:12px; text-transform:uppercase;}
+  body.lang-ar .kicker{text-transform:none;}
+  h2{font-size:clamp(28px,3.4vw,38px); color:var(--ink); line-height:1.25;}
+  .section-sub{color:var(--ink-dim); font-size:17px; margin-top:14px;}
+
+  /* Problem */
+  .problem{background:var(--navy-900); border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05);}
+  .problem-text{font-size:22px; line-height:1.8; color:var(--ink); max-width:820px;}
+  .problem-text strong{color:var(--gold-300);}
+
+  /* Solution steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .step-card{
+    background:var(--navy-800); border:1px solid rgba(201,162,39,0.12); border-radius:var(--radius);
+    padding:32px 28px; position:relative; transition:transform .25s, border-color .25s;
+  }
+  .step-card:hover{transform:translateY(-4px); border-color:rgba(201,162,39,0.4);}
+  .step-num{
+    font-family:'Tajawal',sans-serif; font-weight:900; font-size:14px; color:var(--navy-950);
+    background:var(--gold-500); width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  }
+  body.lang-en .step-num{font-family:'Inter',sans-serif;}
+  .step-title{font-size:19px; font-weight:700; margin-bottom:10px; color:var(--ink);}
+  .step-desc{color:var(--ink-dim); font-size:15px;}
+
+  /* Comparison */
+  .compare{background:var(--paper); color:var(--ink-navy);}
+  .compare .kicker{color:var(--emerald);}
+  .compare h2{color:var(--ink-navy);}
+  .compare-table{
+    background:var(--navy-950); border-radius:var(--radius); overflow:hidden;
+    border:1px solid rgba(201,162,39,0.2);
+  }
+  .compare-row{display:grid; grid-template-columns:1fr 1fr; }
+  .compare-row + .compare-row{border-top:1px solid rgba(255,255,255,0.07);}
+  .compare-cell{padding:22px 26px; font-size:15px;}
+  .compare-row.head .compare-cell{font-weight:800; font-size:14px; padding:16px 26px;}
+  .compare-row.head .cell-old{color:var(--ink-dim); background:rgba(255,255,255,0.02);}
+  .compare-row.head .cell-new{color:var(--navy-950); background:var(--gold-300);}
+  .cell-old{color:var(--ink-dim);}
+  .cell-new{color:var(--ink); background:rgba(201,162,39,0.06); font-weight:500;}
+  .cell-new::before{content:"✓ "; color:var(--emerald-light); font-weight:800;}
+  .cell-old::before{content:"— "; color:rgba(255,255,255,0.25);}
+
+  /* Testimonial */
+  .testimonial{
+    background:var(--navy-900);
+  }
+  .quote-card{
+    max-width:680px; margin:0 auto; text-align:center;
+    background:var(--navy-800); border:1px solid rgba(201,162,39,0.15);
+    border-radius:var(--radius); padding:48px 40px;
+  }
+  .quote-mark{font-family:'Tajawal',sans-serif; font-size:60px; color:var(--gold-500); line-height:1; margin-bottom:10px;}
+  .quote-text{font-size:20px; color:var(--ink); line-height:1.7; margin-bottom:20px;}
+  .quote-author{color:var(--ink-dim); font-size:14px;}
+  .quote-badge{
+    display:inline-block; margin-top:18px; font-size:12px; color:var(--emerald-light);
+    border:1px dashed rgba(47,160,147,0.4); padding:6px 14px; border-radius:999px;
+  }
+
+  /* Pricing */
+  .pricing-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .price-card{
+    background:var(--navy-800); border:1px solid rgba(201,162,39,0.15); border-radius:var(--radius);
+    padding:36px 32px;
+  }
+  .price-card.featured{
+    border:1px solid var(--gold-500);
+    background:linear-gradient(160deg, var(--navy-800), var(--navy-700));
+    position:relative;
+  }
+  .price-badge{
+    position:absolute; top:-13px; right:28px;
+    background:var(--gold-500); color:var(--navy-950); font-size:12px; font-weight:800;
+    padding:5px 14px; border-radius:999px;
+  }
+  body.lang-en .price-badge{right:auto; left:28px;}
+  .price-name{font-size:15px; color:var(--ink-dim); margin-bottom:8px;}
+  .price-amount{font-family:'Tajawal',sans-serif; font-weight:900; font-size:38px; color:var(--gold-300); margin-bottom:6px;}
+  body.lang-en .price-amount{font-family:'Fraunces',serif;}
+  .price-period{color:var(--ink-dim); font-size:14px; margin-bottom:22px;}
+  .price-list{list-style:none; margin-bottom:26px;}
+  .price-list li{padding:8px 0; font-size:14px; color:var(--ink); display:flex; gap:10px; align-items:flex-start;}
+  .price-list li::before{content:"✓"; color:var(--emerald-light); font-weight:800;}
+  .price-btn{
+    display:block; text-align:center; padding:13px; border-radius:10px; font-weight:700; font-size:14px;
+    border:1px solid rgba(201,162,39,0.4); color:var(--ink);
+  }
+  .price-card.featured .price-btn{background:var(--gold-500); color:var(--navy-950); border:none;}
+  .price-fine{text-align:center; color:var(--ink-dim); font-size:13px; margin-top:28px;}
+
+  /* Coming soon */
+  .coming-soon{
+    background:var(--navy-900);
+  }
+  .cs-card{
+    display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center;
+    background:linear-gradient(120deg, rgba(27,122,110,0.12), rgba(201,162,39,0.06));
+    border:1px solid rgba(47,160,147,0.3); border-radius:var(--radius);
+    padding:36px;
+  }
+  .cs-icon{
+    width:64px; height:64px; border-radius:50%; background:var(--emerald);
+    display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;
+  }
+  .cs-title{font-size:20px; font-weight:700; margin-bottom:8px; color:var(--ink);}
+  .cs-desc{color:var(--ink-dim); font-size:15px;}
+  .cs-tag{
+    display:inline-block; margin-top:14px; font-size:12px; font-weight:700; color:var(--emerald-light);
+    background:rgba(47,160,147,0.15); padding:5px 12px; border-radius:999px;
+  }
+
+  /* FAQ */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid rgba(255,255,255,0.08); padding:22px 0;}
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+    font-size:16px; font-weight:600; color:var(--ink);
+  }
+  .faq-q .icon{color:var(--gold-300); font-size:20px; transition:transform .25s; flex-shrink:0;}
+  .faq-item.open .faq-q .icon{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .3s ease, margin-top .3s ease;
+    color:var(--ink-dim); font-size:15px;
+  }
+  .faq-item.open .faq-a{max-height:200px; margin-top:14px;}
+
+  /* Footer CTA */
+  .final-cta{
+    text-align:center; padding:100px 24px;
+    background:
+      radial-gradient(ellipse 700px 400px at 50% 0%, rgba(201,162,39,0.16), transparent 65%),
+      var(--navy-950);
+  }
+  .final-cta h2{margin-bottom:16px;}
+  .final-cta p{color:var(--ink-dim); margin-bottom:32px;}
+
+  footer{
+    border-top:1px solid rgba(255,255,255,0.07);
+    padding:32px 24px; text-align:center; color:var(--ink-dim); font-size:13px;
+  }
+
+  /* Responsive */
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; text-align:center;}
+    .hero-sub{margin-inline:auto;}
+    .dial{width:240px; height:240px;}
+    .steps{grid-template-columns:1fr;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .compare-cell{padding:16px 18px; font-size:14px;}
+    .cs-card{grid-template-columns:1fr; text-align:center;}
+    .cs-icon{margin:0 auto;}
+  }
+
+  :focus-visible{outline:2px solid var(--gold-300); outline-offset:3px;}
+</style>
+</head>
+<body class="lang-ar">
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">جهزني</div>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button data-lang="ar-auto" class="active">AR</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="#pricing" class="nav-cta" data-t="nav_cta">ابدأ دلوقتي</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span><span data-t="eyebrow">مبني لسوق مصر والخليج</span></div>
+      <h1 class="display" data-t="h1">جهّز نفسك للمقابلة اللي <span class="accent">هتغيّر مستقبلك</span></h1>
+      <p class="hero-sub" data-t="hero_sub">كورس مكثف بالفيديو، أسئلة حقيقية، وتقييم فوري — تبدأ النهاردة وتبقى جاهز قبل ما تدخل المقابلة.</p>
+      <a href="#pricing" class="btn-primary" data-t="hero_cta">ابدأ دلوقتي ←</a>
+      <div class="hero-note" data-t="hero_note">بدون التزام طويل. تقدر تلغي في أي وقت.</div>
+    </div>
+    <div class="dial-wrap">
+      <div class="dial">
+        <svg viewBox="0 0 260 260">
+          <defs>
+            <linearGradient id="dialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2FA093"/>
+              <stop offset="100%" stop-color="#E3C766"/>
+            </linearGradient>
+          </defs>
+          <circle class="dial-track" cx="130" cy="130" r="120"/>
+          <circle class="dial-progress" cx="130" cy="130" r="120"/>
+        </svg>
+        <div class="dial-center">
+          <div class="dial-percent">92%</div>
+          <div class="dial-label" data-t="dial_label">جاهز للمقابلة</div>
+        </div>
+      </div>
+      <div class="dial-tag t1" data-t="tag1">تقييم فوري</div>
+      <div class="dial-tag t2" data-t="tag2">أسئلة حقيقية</div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="wrap">
+    <p class="problem-text" data-t="problem_text">
+      مش المشكلة إنك <strong>مش كفء</strong>. المشكلة إنك مش متدرب على إزاي تقول اللي في دماغك بثقة قدام حد غريب بيحكم عليك في ٣٠ دقيقة.
+      كل سنة آلاف من الناس بتخسر فرص شغل ممتازة، مش عشان مؤهلاتهم ناقصة، لكن عشان محدش قعد يجهزهم صح.
+    </p>
+  </div>
+</section>
+
+<section class="solution">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-t="sol_kicker">النظام</div>
+      <h2 class="display" data-t="sol_title">مش مجرد كورس. نظام كامل.</h2>
+      <p class="section-sub" data-t="sol_sub">ثلاث خطوات بسيطة تاخدك من القلق للثقة.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title" data-t="step1_t">تعلّم</div>
+        <div class="step-desc" data-t="step1_d">فيديوهات قصيرة (٥-٨ دقايق) تشرحلك إزاي تجاوب أي سؤال بثقة.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title" data-t="step2_t">اتمرن</div>
+        <div class="step-desc" data-t="step2_d">أسئلة حقيقية من سوق الشغل، مع اختبار قصير بعد كل جزء.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title" data-t="step3_t">اتقيّم</div>
+        <div class="step-desc" data-t="step3_d">تقييم فوري على إجاباتك، تعرف نقط قوتك وضعفك بالظبط.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-t="cmp_kicker">الفرق</div>
+      <h2 class="display" data-t="cmp_title">ليه إحنا مختلفين</h2>
+    </div>
+    <div class="compare-table">
+      <div class="compare-row head">
+        <div class="compare-cell cell-old" data-t="cmp_h1">الطرق التقليدية</div>
+        <div class="compare-cell cell-new" data-t="cmp_h2">جهّزني</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell cell-old" data-t="cmp_r1a">فيديوهات عامة مالهاش علاقة بسوقنا</div>
+        <div class="compare-cell cell-new" data-t="cmp_r1b">محتوى مبني لسوق الشغل في مصر والخليج</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell cell-old" data-t="cmp_r2a">تتفرج وتنسى</div>
+        <div class="compare-cell cell-new" data-t="cmp_r2b">تمارين تفاعلية تفضل معاك</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell cell-old" data-t="cmp_r3a">مفيش حد يقيّمك</div>
+        <div class="compare-cell cell-new" data-t="cmp_r3b">تقييم فوري لكل إجابة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="wrap">
+    <div class="quote-card">
+      <div class="quote-mark">"</div>
+      <p class="quote-text" data-t="quote_text">بعد ما خلصت الكورس حسيت إني بجد جاهز. دخلت الانترفيو وحسيت إني مسيطر على الموقف من أول دقيقة.</p>
+      <div class="quote-author" data-t="quote_author">— مستخدم تجريبي، مسؤول مبيعات</div>
+      <div class="quote-badge" data-t="quote_badge">هنضيف تقييمات حقيقية قريباً</div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-t="price_kicker">الأسعار</div>
+      <h2 class="display" data-t="price_title">ابدأ بسعر بسيط</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name" data-t="p1_name">العرض التمهيدي</div>
+        <div class="price-amount">99 ج.م</div>
+        <div class="price-period" data-t="p1_period">وصول كامل للكورس الأول</div>
+        <ul class="price-list">
+          <li data-t="p1_f1">كل فيديوهات الكورس الأول</li>
+          <li data-t="p1_f2">اختبارات تفاعلية بعد كل جزء</li>
+          <li data-t="p1_f3">شهادة إتمام</li>
+        </ul>
+        <a href="#" class="price-btn" data-t="p1_btn">ابدأ بالعرض</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge" data-t="p2_badge">الأكثر طلباً</div>
+        <div class="price-name" data-t="p2_name">الاشتراك الشهري</div>
+        <div class="price-amount">249 ج.م</div>
+        <div class="price-period" data-t="p2_period">شهرياً، تلغي في أي وقت</div>
+        <ul class="price-list">
+          <li data-t="p2_f1">كل حاجة في العرض التمهيدي</li>
+          <li data-t="p2_f2">كورسات جديدة كل شهر</li>
+          <li data-t="p2_f3">تحديثات مستمرة للأسئلة</li>
+          <li data-t="p2_f4">خصم على المقابلة الحقيقية (قريباً)</li>
+        </ul>
+        <a href="#" class="price-btn" data-t="p2_btn">اشترك دلوقتي</a>
+      </div>
+    </div>
+    <div class="price-fine" data-t="price_fine">مفيش رسوم مخفية. تقدر تلغي في أي وقت من غير تعقيد.</div>
+  </div>
+</section>
+
+<section class="coming-soon">
+  <div class="wrap">
+    <div class="cs-card">
+      <div class="cs-icon">🎯</div>
+      <div>
+        <div class="cs-title" data-t="cs_title">مقابلة حقيقية مع خبير توظيف</div>
+        <div class="cs-desc" data-t="cs_desc">خلّص الكورس واحجز جلسة مقابلة تجريبية حقيقية مع متخصص توظيف — بخصم خاص لمشتركين جهّزني.</div>
+        <div class="cs-tag" data-t="cs_tag">متاح قريباً</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-t="faq_kicker">أسئلة شائعة</div>
+      <h2 class="display" data-t="faq_title">لسه عندك سؤال؟</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span data-t="faq_q1">هل الكورس مناسب لأي مجال وظيفي؟</span><span class="icon">+</span></div>
+        <div class="faq-a" data-t="faq_a1">آه، المحتوى الأساسي مبني على أساسيات المقابلات اللي تنفع أي مجال، وهنضيف مسارات متخصصة قريباً.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span data-t="faq_q2">هل ممكن ألغي الاشتراك؟</span><span class="icon">+</span></div>
+        <div class="faq-a" data-t="faq_a2">أكيد، في أي وقت ومن غير تعقيد، من إعدادات حسابك مباشرة.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span data-t="faq_q3">هل المحتوى بالعربي ولا الإنجليزي؟</span><span class="icon">+</span></div>
+        <div class="faq-a" data-t="faq_a3">الاتنين — تقدر تختار اللغة اللي تريحك.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="display" data-t="final_title">جاهز تبدأ؟</h2>
+    <p data-t="final_sub">أول خطوة نحو مقابلة تحسها إنك متحكم فيها من أول دقيقة.</p>
+    <a href="#pricing" class="btn-primary" data-t="final_cta">ابدأ دلوقتي ←</a>
+  </div>
+</section>
+
+<footer data-t="footer">© 2026 جهزني. كل الحقوق محفوظة.</footer>
+
+<script>
+const translations = {
+  ar: {
+    nav_cta:"ابدأ دلوقتي", eyebrow:"مبني لسوق مصر والخليج",
+    h1:'جهّز نفسك للمقابلة اللي <span class="accent">هتغيّر مستقبلك</span>',
+    hero_sub:"كورس مكثف بالفيديو، أسئلة حقيقية، وتقييم فوري — تبدأ النهاردة وتبقى جاهز قبل ما تدخل المقابلة.",
+    hero_cta:"ابدأ دلوقتي ←", hero_note:"بدون التزام طويل. تقدر تلغي في أي وقت.",
+    dial_label:"جاهز للمقابلة", tag1:"تقييم فوري", tag2:"أسئلة حقيقية",
+    problem_text:'مش المشكلة إنك <strong>مش كفء</strong>. المشكلة إنك مش متدرب على إزاي تقول اللي في دماغك بثقة قدام حد غريب بيحكم عليك في ٣٠ دقيقة. كل سنة آلاف من الناس بتخسر فرص شغل ممتازة، مش عشان مؤهلاتهم ناقصة، لكن عشان محدش قعد يجهزهم صح.',
+    sol_kicker:"النظام", sol_title:"مش مجرد كورس. نظام كامل.", sol_sub:"ثلاث خطوات بسيطة تاخدك من القلق للثقة.",
+    step1_t:"تعلّم", step1_d:"فيديوهات قصيرة (٥-٨ دقايق) تشرحلك إزاي تجاوب أي سؤال بثقة.",
+    step2_t:"اتمرن", step2_d:"أسئلة حقيقية من سوق الشغل، مع اختبار قصير بعد كل جزء.",
+    step3_t:"اتقيّم", step3_d:"تقييم فوري على إجاباتك، تعرف نقط قوتك وضعفك بالظبط.",
+    cmp_kicker:"الفرق", cmp_title:"ليه إحنا مختلفين",
+    cmp_h1:"الطرق التقليدية", cmp_h2:"جهّزني",
+    cmp_r1a:"فيديوهات عامة مالهاش علاقة بسوقنا", cmp_r1b:"محتوى مبني لسوق الشغل في مصر والخليج",
+    cmp_r2a:"تتفرج وتنسى", cmp_r2b:"تمارين تفاعلية تفضل معاك",
+    cmp_r3a:"مفيش حد يقيّمك", cmp_r3b:"تقييم فوري لكل إجابة",
+    quote_text:"بعد ما خلصت الكورس حسيت إني بجد جاهز. دخلت الانترفيو وحسيت إني مسيطر على الموقف من أول دقيقة.",
+    quote_author:"— مستخدم تجريبي، مسؤول مبيعات", quote_badge:"هنضيف تقييمات حقيقية قريباً",
+    price_kicker:"الأسعار", price_title:"ابدأ بسعر بسيط",
+    p1_name:"العرض التمهيدي", p1_period:"وصول كامل للكورس الأول",
+    p1_f1:"كل فيديوهات الكورس الأول", p1_f2:"اختبارات تفاعلية بعد كل جزء", p1_f3:"شهادة إتمام", p1_btn:"ابدأ بالعرض",
+    p2_badge:"الأكثر طلباً", p2_name:"الاشتراك الشهري", p2_period:"شهرياً، تلغي في أي وقت",
+    p2_f1:"كل حاجة في العرض التمهيدي", p2_f2:"كورسات جديدة كل شهر", p2_f3:"تحديثات مستمرة للأسئلة",
+    p2_f4:"خصم على المقابلة الحقيقية (قريباً)", p2_btn:"اشترك دلوقتي",
+    price_fine:"مفيش رسوم مخفية. تقدر تلغي في أي وقت من غير تعقيد.",
+    cs_title:"مقابلة حقيقية مع خبير توظيف",
+    cs_desc:"خلّص الكورس واحجز جلسة مقابلة تجريبية حقيقية مع متخصص توظيف — بخصم خاص لمشتركين جهّزني.",
+    cs_tag:"متاح قريباً",
+    faq_kicker:"أسئلة شائعة", faq_title:"لسه عندك سؤال؟",
+    faq_q1:"هل الكورس مناسب لأي مجال وظيفي؟", faq_a1:"آه، المحتوى الأساسي مبني على أساسيات المقابلات اللي تنفع أي مجال، وهنضيف مسارات متخصصة قريباً.",
+    faq_q2:"هل ممكن ألغي الاشتراك؟", faq_a2:"أكيد، في أي وقت ومن غير تعقيد، من إعدادات حسابك مباشرة.",
+    faq_q3:"هل المحتوى بالعربي ولا الإنجليزي؟", faq_a3:"الاتنين — تقدر تختار اللغة اللي تريحك.",
+    final_title:"جاهز تبدأ؟", final_sub:"أول خطوة نحو مقابلة تحسها إنك متحكم فيها من أول دقيقة.", final_cta:"ابدأ دلوقتي ←",
+    footer:"© 2026 جهزني. كل الحقوق محفوظة."
+  },
+  gulf: {
+    nav_cta:"ابدأ الحين", eyebrow:"مبني لسوق مصر والخليج",
+    h1:'جهّز حالك للمقابلة اللي <span class="accent">بتغيّر مستقبلك</span>',
+    hero_sub:"كورس فيديو مركّز، أسئلة حقيقية، وتقييم فوري — تبدأ اليوم وتصير جاهز قبل لا تدخل المقابلة.",
+    hero_cta:"ابدأ الحين ←", hero_note:"بدون التزام طويل. تقدر تلغي بأي وقت.",
+    dial_label:"جاهز للمقابلة", tag1:"تقييم فوري", tag2:"أسئلة حقيقية",
+    problem_text:'مو إن مؤهلاتك ناقصة. المشكلة إنك ما اتدربت كيف توصّل اللي في راسك بثقة قدام شخص غريب بيحكم عليك في ٣٠ دقيقة بس. كل سنة فيه ناس كثير يخسرون فرص وظايف ممتازة، مو لأن مستواهم ضعيف، لكن لأن محد جهّزهم بالشكل الصح.',
+    sol_kicker:"النظام", sol_title:"مو مجرد كورس. نظام كامل.", sol_sub:"ثلاث خطوات بسيطة تاخذك من القلق للثقة.",
+    step1_t:"تعلّم", step1_d:"فيديوهات قصيرة (٥-٨ دقايق) تشرح لك كيف تجاوب أي سؤال بثقة.",
+    step2_t:"تمرّن", step2_d:"أسئلة حقيقية من سوق العمل، مع كويز بعد كل جزء.",
+    step3_t:"انعرف تقييمك", step3_d:"تقييم فوري على إجاباتك، تعرف نقاط قوتك وضعفك بالضبط.",
+    cmp_kicker:"الفرق", cmp_title:"ليش إحنا مختلفين",
+    cmp_h1:"الطرق التقليدية", cmp_h2:"جهّزني",
+    cmp_r1a:"فيديوهات عامة ما لها علاقة بسوقنا", cmp_r1b:"محتوى مبني لسوق العمل في الخليج",
+    cmp_r2a:"تتفرج وتنسى", cmp_r2b:"تمارين تفاعلية تفضل وياك",
+    cmp_r3a:"محد يقيّم إجاباتك", cmp_r3b:"تقييم فوري لكل إجابة",
+    quote_text:"بعد لا خلّصت الكورس حسّيت إني جاهز فعلاً. دخلت المقابلة وحسّيت إني متحكم بالموقف من أول دقيقة.",
+    quote_author:"— مستخدم تجريبي، مسؤول مبيعات", quote_badge:"راح نضيف تقييمات حقيقية قريباً",
+    price_kicker:"الأسعار", price_title:"ابدأ بسعر بسيط",
+    p1_name:"العرض التمهيدي", p1_period:"وصول كامل للكورس الأول",
+    p1_f1:"كل فيديوهات الكورس الأول", p1_f2:"اختبارات تفاعلية بعد كل جزء", p1_f3:"شهادة إتمام", p1_btn:"ابدأ بالعرض",
+    p2_badge:"الأكثر طلباً", p2_name:"الاشتراك الشهري", p2_period:"شهرياً، تلغي بأي وقت",
+    p2_f1:"كل حاجة في العرض التمهيدي", p2_f2:"كورسات جديدة كل شهر", p2_f3:"تحديثات مستمرة للأسئلة",
+    p2_f4:"خصم على المقابلة الحقيقية (قريباً)", p2_btn:"اشترك الحين",
+    price_fine:"ما فيه رسوم مخفية. تقدر تلغي بأي وقت من غير أي تعقيد.",
+    cs_title:"مقابلة حقيقية مع خبير توظيف",
+    cs_desc:"خلّص الكورس واحجز جلسة مقابلة تجريبية حقيقية مع متخصص توظيف — بخصم خاص لمشتركين جهّزني.",
+    cs_tag:"يتوفر قريباً",
+    faq_kicker:"أسئلة شائعة", faq_title:"لسه عندك سؤال؟",
+    faq_q1:"هل الكورس مناسب لأي مجال وظيفي؟", faq_a1:"إي، المحتوى الأساسي مبني على أساسيات المقابلات اللي تنفع أي مجال، وراح نضيف مسارات متخصصة قريباً.",
+    faq_q2:"أقدر ألغي الاشتراك؟", faq_a2:"أكيد، بأي وقت ومن غير تعقيد، من إعدادات حسابك مباشرة.",
+    faq_q3:"المحتوى بالعربي ولا الإنجليزي؟", faq_a3:"الاثنين — تقدر تختار اللغة اللي تريحك.",
+    final_title:"جاهز تبدأ؟", final_sub:"أول خطوة نحو مقابلة تحس فيها إنك متحكم فيها من أول دقيقة.", final_cta:"ابدأ الحين ←",
+    footer:"© 2026 جهزني. جميع الحقوق محفوظة."
+  },
+  en: {
+    nav_cta:"Start Now", eyebrow:"Built for Egypt & Gulf job markets",
+    h1:'Walk into your next interview like you\'ve done it <span class="accent">a hundred times</span>',
+    hero_sub:"Focused video lessons, real questions, instant feedback — get interview-ready before the pressure hits.",
+    hero_cta:"Start Now →", hero_note:"No long commitment. Cancel anytime.",
+    dial_label:"Interview Ready", tag1:"Instant Feedback", tag2:"Real Questions",
+    problem_text:"It's not that you're <strong>not qualified</strong>. It's that no one ever trained you to say what's in your head, clearly and confidently, to a stranger judging you in 30 minutes. Every year, thousands of good candidates lose great offers — not because they lacked the skills, but because no one prepared them properly.",
+    sol_kicker:"The System", sol_title:"Not just a course. A complete system.", sol_sub:"Three simple steps from anxious to confident.",
+    step1_t:"Learn", step1_d:"Short videos (5–8 min) that teach you how to answer any question with confidence.",
+    step2_t:"Practice", step2_d:"Real questions from the job market, with a quiz after every section.",
+    step3_t:"Get Feedback", step3_d:"Instant evaluation on your answers, so you know your strengths and gaps.",
+    cmp_kicker:"The Difference", cmp_title:"Why we're different",
+    cmp_h1:"Traditional Prep", cmp_h2:"Jahzny",
+    cmp_r1a:"Generic content, disconnected from our market", cmp_r1b:"Built specifically for Egypt & Gulf job markets",
+    cmp_r2a:"Passive watching, no retention", cmp_r2b:"Interactive practice that sticks",
+    cmp_r3a:"No one checks your answers", cmp_r3b:"Instant feedback on every response",
+    quote_text:"After finishing the course, I genuinely felt ready. I walked into the interview in control from the first minute.",
+    quote_author:"— Beta user, Sales Manager", quote_badge:"Real testimonials coming after launch",
+    price_kicker:"Pricing", price_title:"Start with a simple price",
+    p1_name:"Intro Offer", p1_period:"Full access to your first course",
+    p1_f1:"All videos in the first course", p1_f2:"Interactive quizzes after each section", p1_f3:"Completion certificate", p1_btn:"Start with intro offer",
+    p2_badge:"Most Popular", p2_name:"Monthly Subscription", p2_period:"Billed monthly, cancel anytime",
+    p2_f1:"Everything in the intro offer", p2_f2:"New courses every month", p2_f3:"Ongoing question updates",
+    p2_f4:"Discount on real mock interview (soon)", p2_btn:"Subscribe Now",
+    price_fine:"No hidden fees. Cancel anytime, no hassle.",
+    cs_title:"Real Mock Interview with a Hiring Expert",
+    cs_desc:"Finish the course and book a real mock interview with a hiring professional — at a special discount for Jahzny subscribers.",
+    cs_tag:"Coming Soon",
+    faq_kicker:"FAQ", faq_title:"Still have questions?",
+    faq_q1:"Is this course relevant to any field?", faq_a1:"Yes — the core content covers universal interview fundamentals that apply across roles, with specialized tracks coming soon.",
+    faq_q2:"Can I cancel my subscription?", faq_a2:"Yes, anytime, directly from your account settings — no hassle.",
+    faq_q3:"Is the content in Arabic or English?", faq_a3:"Both — you can choose whichever language works best for you.",
+    final_title:"Ready to start?", final_sub:"Your first step toward an interview you'll actually feel in control of.", final_cta:"Start Now →",
+    footer:"© 2026 Jahzny. All rights reserved."
+  }
+};
+
+let jahznyLangMemory = null;
+let activeArDialect = 'ar'; // which Arabic dialect powers the "AR" button — set once on load
+
+function setLang(lang){
+  document.body.className = 'lang-' + (lang === 'en' ? 'en' : 'ar');
+  document.documentElement.lang = lang === 'en' ? 'en' : 'ar';
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const key = el.getAttribute('data-t');
+    if(translations[lang][key] !== undefined){
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  const isArabic = (lang === 'ar' || lang === 'gulf');
+  document.querySelectorAll('.lang-toggle button').forEach(b=>{
+    const isArButton = b.dataset.lang === 'ar-auto';
+    b.classList.toggle('active', isArButton ? isArabic : b.dataset.lang === lang);
+  });
+  jahznyLangMemory = lang;
+}
+
+document.querySelectorAll('.lang-toggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = btn.dataset.lang === 'ar-auto' ? activeArDialect : btn.dataset.lang;
+    setLang(target);
+  });
+});
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click', ()=>{
+    item.classList.toggle('open');
+  });
+});
+
+// ---- Auto-detect dialect from ad campaign link ----
+// Ad links should use: jahzny.com/?region=eg  OR  jahzny.com/?region=gulf
+// The visitor only ever sees "AR" / "EN" — the dialect underneath is invisible.
+function detectInitialLang(){
+  const params = new URLSearchParams(window.location.search);
+  const region = params.get('region');
+  if(region === 'eg') return 'ar';
+  if(region === 'gulf') return 'gulf';
+  // no region param (organic visit, shared link, etc.) — default to Egyptian Arabic
+  return 'ar';
+}
+
+activeArDialect = detectInitialLang();
+setLang(activeArDialect);
+</script>
+
+</body>
+</html>
