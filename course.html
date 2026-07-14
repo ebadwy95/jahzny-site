@@ -117,6 +117,89 @@
     padding-top:24px; border-top:1px solid rgba(255,255,255,0.08);
   }
   .footer-note a{color:var(--emerald);}
+
+  /* ---- Quizzes ---- */
+  #quizzes-section{display:none; margin-top:28px;}
+  .section-heading{
+    font-size:19px; font-weight:700; color:var(--gold-300); margin-bottom:6px; text-align:center;
+  }
+  .section-sub{color:var(--ink-dim); font-size:13px; text-align:center; margin-bottom:20px;}
+  .quiz-body{display:none; padding:16px 14px 4px 14px;}
+  .quiz-body.open{display:block;}
+  .quiz-question{font-size:15px; color:var(--ink); margin-bottom:16px; line-height:1.6;}
+  .quiz-options{display:flex; flex-direction:column; gap:8px; margin-bottom:16px;}
+  .quiz-option{
+    text-align:right; padding:11px 14px; border-radius:10px; cursor:pointer;
+    background:var(--navy-950); border:1.5px solid rgba(201,162,39,0.2); color:var(--ink); font-size:14px;
+  }
+  .quiz-option.selected{border-color:var(--gold-300); background:rgba(201,162,39,0.1);}
+  .quiz-next-btn{
+    width:100%; padding:12px; border-radius:10px; border:none; font-weight:800; font-size:14px;
+    background:var(--gold-500); color:var(--navy-950); cursor:pointer;
+  }
+  .quiz-next-btn:disabled{background:var(--navy-900); color:var(--ink-dim); cursor:not-allowed;}
+  .quiz-progress{font-size:12px; color:var(--ink-dim); margin-bottom:10px;}
+  .quiz-result{text-align:center; padding:8px 4px 4px;}
+  .quiz-result-icon{font-size:32px; margin-bottom:8px;}
+  .quiz-result-title{font-size:16px; font-weight:700; margin-bottom:6px;}
+  .quiz-result-score{font-size:13px; color:var(--ink-dim); margin-bottom:16px;}
+  .quiz-retry-btn{
+    padding:10px 22px; border-radius:10px; border:1px solid rgba(201,162,39,0.4);
+    background:transparent; color:var(--ink); font-weight:700; font-size:13px; cursor:pointer;
+  }
+
+  /* ---- Certificate ---- */
+  #certificate-section{display:none; margin-top:28px; text-align:center;}
+  .cert-name-input{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(201,162,39,0.3);
+    background:var(--navy-900); color:var(--ink); font-size:14px; text-align:center; margin-bottom:12px;
+    font-family:inherit;
+  }
+  .cert-download-btn{
+    padding:14px 30px; border-radius:10px; border:none; font-weight:800; font-size:14px;
+    background:linear-gradient(135deg,var(--gold-300),var(--gold-500)); color:var(--navy-950); cursor:pointer;
+  }
+  .cert-confirm-box{
+    display:none; max-width:360px; margin:0 auto; background:var(--navy-900);
+    border:1px solid rgba(201,162,39,0.3); border-radius:12px; padding:18px; margin-top:14px;
+  }
+  .cert-confirm-box.open{display:block;}
+  .cert-confirm-text{font-size:13px; color:var(--ink-dim); margin-bottom:14px; line-height:1.6;}
+  .cert-confirm-name{color:var(--gold-300); font-weight:800;}
+  .cert-confirm-actions{display:flex; gap:8px;}
+  .cert-confirm-yes{
+    flex:1; padding:10px; border-radius:8px; border:none; background:var(--gold-500);
+    color:var(--navy-950); font-weight:800; font-size:13px; cursor:pointer;
+  }
+  .cert-confirm-no{
+    flex:1; padding:10px; border-radius:8px; border:1px solid rgba(201,162,39,0.3);
+    background:transparent; color:var(--ink); font-size:13px; cursor:pointer;
+  }
+  .cert-edit-note{font-size:12px; color:var(--ink-dim); margin-top:10px;}
+
+  @media print{
+    body *{visibility:hidden;}
+    #print-certificate, #print-certificate *{visibility:visible;}
+    #print-certificate{
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+  }
+  #print-certificate{display:none;}
+  .cert-page{
+    width:100%; height:100vh; background:var(--navy-950); display:flex; align-items:center; justify-content:center;
+  }
+  .cert-frame{
+    width:90%; max-width:900px; border:3px solid var(--gold-500); border-radius:14px; padding:50px 40px;
+    text-align:center; background:var(--navy-900);
+  }
+  .cert-frame .logo{color:var(--gold-300); font-size:22px; margin-bottom:20px;}
+  .cert-frame .kicker{color:var(--emerald); font-size:13px; letter-spacing:2px; margin-bottom:16px;}
+  .cert-frame h1{font-size:30px; color:var(--ink); margin-bottom:6px;}
+  .cert-frame .accent-line{color:var(--gold-300); font-size:30px; font-weight:900; margin-bottom:20px;}
+  .cert-frame .name{font-size:26px; color:var(--ink); font-weight:900; margin:20px 0; border-bottom:1px solid var(--gold-500); display:inline-block; padding-bottom:8px;}
+  .cert-frame .track{font-size:14px; color:var(--gold-300); margin-bottom:24px;}
+  .cert-frame .fine{font-size:11px; color:var(--ink-dim); margin-top:24px;}
 </style>
 </head>
 <body>
@@ -199,8 +282,45 @@
     </div>
   </div>
 
+  <div id="quizzes-section">
+    <div class="section-heading" data-t="quizzes_heading">الاختبارات</div>
+    <div class="section-sub" data-t="quizzes_sub">خلّصت الفيديوهات كلها! دلوقتي وقت الاختبارات — 5 اختبارات قصيرة، لازم تنجح في كل واحد قبل ما تفتح اللي بعده.</div>
+    <div id="quiz-list"></div>
+  </div>
+
+  <div id="certificate-section">
+    <div class="section-heading" data-t="cert_heading">🎉 شهادتك جاهزة</div>
+    <div class="section-sub" data-t="cert_sub">اكتب اسمك بالظبط زي ما تحب يظهر في الشهادة</div>
+    <input type="text" id="cert-name" class="cert-name-input" data-t-placeholder="cert_name_ph" placeholder="اكتب اسمك">
+    <button class="cert-download-btn" onclick="handleDownloadClick()" data-t="cert_download_btn">حمّل شهادتك</button>
+    <div class="cert-confirm-box" id="cert-confirm-box">
+      <div class="cert-confirm-text" id="cert-confirm-text"></div>
+      <div class="cert-confirm-actions">
+        <button class="cert-confirm-yes" onclick="confirmAndDownload()" data-t="cert_confirm_yes">أيوه، اطبع الشهادة</button>
+        <button class="cert-confirm-no" onclick="cancelConfirm()" data-t="cert_confirm_no">لأ، عايز أعدل</button>
+      </div>
+    </div>
+    <div class="cert-edit-note" id="cert-edit-note"></div>
+  </div>
+
   <div class="footer-note">
     <span data-t="footer_help">عندك سؤال أو مشكلة؟ ابعتلنا على</span> <a href="mailto:hello@jahzny.com">hello@jahzny.com</a>
+  </div>
+</div>
+
+<div id="print-certificate">
+  <div class="cert-page">
+    <div class="cert-frame">
+      <div class="logo display">جهزني</div>
+      <div class="kicker">CERTIFICATE OF COMPLETION</div>
+      <h1 class="display">Jahzny Certified:</h1>
+      <div class="accent-line display">Interview-Ready</div>
+      <div id="cert-name-display" class="name">—</div>
+      <div class="track" id="cert-track-display">Customer Service & Administrative</div>
+      <div class="fine" id="cert-date-display"></div>
+      <div class="fine" id="cert-id-display"></div>
+      <div class="fine">Issued by Jahzny upon successful course completion.</div>
+    </div>
   </div>
 </div>
 
@@ -225,7 +345,19 @@
       m3_note:"باقي المسارات (Sales, HR, Marketing) بتتحط تباعاً.",
       m4_title:"التفاوض على الراتب", m4_l1:"إزاي تتفاوض من غير ما تبان طماع",
       m5_title:"يوم المقابلة", m5_l1:"لغة الجسد، التنفس، الأسئلة اللي تسألها",
-      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ ابعتلنا على"
+      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ ابعتلنا على",
+      quizzes_heading:"الاختبارات",
+      quizzes_sub:"خلّصت الفيديوهات كلها! دلوقتي وقت الاختبارات - 5 اختبارات قصيرة، لازم تنجح في كل واحد قبل ما تفتح اللي بعده.",
+      quiz_locked:"🔒 خلّص الاختبار اللي قبله الأول",
+      quiz_start:"ابدأ الاختبار", quiz_passed:"ناجح ✓", quiz_next:"التالي", quiz_finish:"إنهاء الاختبار",
+      quiz_pass_title:"عدّيت الاختبار! 🎉", quiz_fail_title:"لسه ما وصلتش النسبة المطلوبة",
+      quiz_retry:"إعادة المحاولة", quiz_continue:"الاختبار الجاي",
+      cert_heading:"🎉 شهادتك جاهزة", cert_sub:"اكتب اسمك بالظبط زي ما تحب يظهر في الشهادة",
+      cert_name_ph:"اكتب اسمك", cert_download_btn:"حمّل شهادتك",
+      cert_confirm_yes:"أيوه، اطبع الشهادة", cert_confirm_no:"لأ، عايز أعدل",
+      cert_confirm_first:"هيتكتب على شهادتك:", cert_confirm_edit:"هتغيّر الاسم لـ",
+      cert_edit_warning:"ده هيكون التعديل الوحيد المسموح بيه على الاسم.",
+      cert_edit_locked:"استخدمت فرصة التعديل بتاعتك بالفعل. الاسم اللي هيتطبع هو",
     },
     gulf: {
       logo_text:"جهزني",
@@ -244,7 +376,19 @@
       m3_note:"باقي المسارات (Sales, HR, Marketing) بتنزل تباعاً.",
       m4_title:"التفاوض على الراتب", m4_l1:"كيف تتفاوض من غير ما تبان طماع",
       m5_title:"يوم المقابلة", m5_l1:"لغة الجسد، التنفس، الأسئلة اللي تسألها",
-      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ تواصل معنا على"
+      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ تواصل معنا على",
+      quizzes_heading:"الاختبارات",
+      quizzes_sub:"خلّصت الفيديوهات كلها! الحين وقت الاختبارات - 5 اختبارات قصيرة، لازم تنجح في كل وحد قبل لا تفتح اللي بعده.",
+      quiz_locked:"🔒 خلّص الاختبار اللي قبله أول",
+      quiz_start:"ابدأ الاختبار", quiz_passed:"ناجح ✓", quiz_next:"التالي", quiz_finish:"إنهاء الاختبار",
+      quiz_pass_title:"عدّيت الاختبار! 🎉", quiz_fail_title:"لسه ما وصلت النسبة المطلوبة",
+      quiz_retry:"إعادة المحاولة", quiz_continue:"الاختبار الجاي",
+      cert_heading:"🎉 شهادتك جاهزة", cert_sub:"اكتب اسمك بالضبط زي ما تحب يطلع في الشهادة",
+      cert_name_ph:"اكتب اسمك", cert_download_btn:"حمّل شهادتك",
+      cert_confirm_yes:"أيوه، اطبع الشهادة", cert_confirm_no:"لا، أبي أعدّل",
+      cert_confirm_first:"بينكتب على شهادتك:", cert_confirm_edit:"بتغيّر الاسم لـ",
+      cert_edit_warning:"هذا بيكون التعديل الوحيد المسموح فيه على الاسم.",
+      cert_edit_locked:"استخدمت فرصة التعديل حقتك خلاص. الاسم اللي بينطبع هو",
     },
     en: {
       logo_text:"Jahzny",
@@ -263,7 +407,19 @@
       m3_note:"More tracks (Sales, HR, Marketing) rolling out soon.",
       m4_title:"Salary Negotiation", m4_l1:"How to negotiate without seeming greedy",
       m5_title:"Interview Day", m5_l1:"Body language, breathing, questions to ask",
-      soon:"Coming soon", footer_help:"Questions or issues? Reach us at"
+      soon:"Coming soon", footer_help:"Questions or issues? Reach us at",
+      quizzes_heading:"Quizzes",
+      quizzes_sub:"You've finished all the videos! Time for 5 short quizzes — pass each one to unlock the next.",
+      quiz_locked:"🔒 Finish the previous quiz first",
+      quiz_start:"Start quiz", quiz_passed:"Passed ✓", quiz_next:"Next", quiz_finish:"Finish quiz",
+      quiz_pass_title:"You passed! 🎉", quiz_fail_title:"You haven't reached the required score yet",
+      quiz_retry:"Try again", quiz_continue:"Next quiz",
+      cert_heading:"🎉 Your certificate is ready", cert_sub:"Type your name exactly as you'd like it to appear",
+      cert_name_ph:"Type your name", cert_download_btn:"Download your certificate",
+      cert_confirm_yes:"Yes, print my certificate", cert_confirm_no:"No, let me edit",
+      cert_confirm_first:"Your certificate will show:", cert_confirm_edit:"Change the name to",
+      cert_edit_warning:"This will be the only name change you're allowed.",
+      cert_edit_locked:"You've already used your one edit. The name that will print is",
     }
   };
 
@@ -314,6 +470,8 @@
     "1-3": "lesson-1-3.mp4",
     "2-1": "lesson-2-1.mp4",
     "3-1": "lesson-3-1.mp4",
+    "4-1": "lesson-4-1.mp4",
+    "5-1": "lesson-5-1.mp4",
   };
 
   // The fixed order lessons must be completed in — matches the data-lesson
@@ -396,6 +554,7 @@
       videoEl.addEventListener('ended', ()=>{
         markCompleted(id);
         setupLessonVideos(); // re-run to unlock the next lesson immediately
+        checkQuizzesUnlock();
       });
 
       const lessonRow = wrap.querySelector('.lesson');
@@ -410,6 +569,395 @@
   }
 
   setupLessonVideos();
+
+  // =====================================================
+  // Quizzes
+  // =====================================================
+  const PASS_THRESHOLD = 0.7;
+
+  const QUIZZES = [
+    {
+      id: "q1",
+      title: { ar: "الأساسيات", en: "Foundations" },
+      questions: [
+        {
+          q: { ar: "وش الهدف الحقيقي وراء سؤال (احكيلي عن نفسك)؟", en: "What's the real purpose behind \"Tell me about yourself\"?" },
+          options: {
+            ar: ["اختبار ذاكرتك", "تطمين الشخص قدامك وتقليل المخاطرة", "معرفة تفاصيل حياتك الشخصية", "قياس مدة تركيزك"],
+            en: ["Testing your memory", "Reassuring the interviewer and reducing risk", "Learning personal life details", "Measuring attention span"],
+          },
+          correct: 1,
+        },
+        {
+          q: { ar: "الانطباع الأول بيتكوّن خلال؟", en: "The first impression forms within?" },
+          options: { ar: ["نص ساعة", "أول دقيقة تقريباً", "بعد المقابلة بيوم", "لا يتكوّن إلا بالنهاية"], en: ["Half an hour", "About the first minute", "A day after the interview", "Only at the very end"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "هيكل (الحاضر - الماضي - المستقبل) بيُستخدم في؟", en: "The \"Present - Past - Future\" structure is used for?" },
+          options: { ar: ["التفاوض على الراتب", "سؤال (احكيلي عن نفسك)", "سؤال الاعتراضات", "نهاية المقابلة"], en: ["Salary negotiation", "\"Tell me about yourself\"", "Handling objections", "Ending the interview"] },
+          correct: 1,
+        },
+      ],
+    },
+    {
+      id: "q2",
+      title: { ar: "الأسئلة السلوكية", en: "Behavioral Questions" },
+      questions: [
+        {
+          q: { ar: "حرف الـ A في STAR بيرمز لـ؟", en: "The \"A\" in STAR stands for?" },
+          options: { ar: ["Ability", "Action", "Attitude", "Achievement"], en: ["Ability", "Action", "Attitude", "Achievement"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "الأفضل في وصف الإجراء إنك تقول؟", en: "It's better to describe the action by saying?" },
+          options: { ar: ["احنا سوينا", "أنا عملت", "الفريق عمل", "حصل إن"], en: ["\"We did\"", "\"I did\"", "\"The team did\"", "\"It happened that\""] },
+          correct: 1,
+        },
+        {
+          q: { ar: "أفضل رد على (ليه سبت شغلك السابق) بيركّز على؟", en: "The best answer to \"Why did you leave your last job\" focuses on?" },
+          options: { ar: ["انتقاد صاحب العمل السابق", "اللي بتدور عليه للمستقبل", "الراتب القديم", "زملاء العمل"], en: ["Criticizing the previous employer", "What you're looking for next", "Your old salary", "Former colleagues"] },
+          correct: 1,
+        },
+      ],
+    },
+    {
+      id: "q3",
+      title: { ar: "خدمة العملاء والأعمال الإدارية", en: "Customer Service & Administrative" },
+      questions: [
+        {
+          q: { ar: "إطار التعامل مع عميل غاضب هو؟", en: "The framework for handling an angry customer is?" },
+          options: { ar: ["تجاهل - انتظر - اقفل", "اسمع - اعترف - حل", "جادل - وضّح - انهِ", "اعتذر فقط"], en: ["Ignore - wait - close", "Listen - acknowledge - solve", "Argue - explain - end", "Just apologize"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "أفضل إجابة لسؤال تنظيم المهام لازم تحتوي على؟", en: "The best answer about organizing tasks should include?" },
+          options: { ar: ["أرتب حسب الأهمية بشكل عام", "نظام واضح ومحدد", "الاعتماد على الذاكرة فقط", "لا شيء محدد"], en: ["Generic \"I prioritize\"", "A clear specific system", "Relying on memory only", "Nothing specific"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "عند الاعتراف بخطأ قدام عميل أو مدير، الأهم هو؟", en: "When admitting a mistake to a customer or manager, the key is?" },
+          options: { ar: ["إنكار الخطأ", "تحمّل المسؤولية والتركيز على التعلم", "إلقاء اللوم على النظام", "تجاهل الموقف"], en: ["Denying the mistake", "Owning it and focusing on the lesson learned", "Blaming the system", "Ignoring it"] },
+          correct: 1,
+        },
+      ],
+    },
+    {
+      id: "q4",
+      title: { ar: "التفاوض على الراتب", en: "Salary Negotiation" },
+      questions: [
+        {
+          q: { ar: "يفضّل إنك ما تكون أول من يذكر رقم الراتب لأن؟", en: "It's better not to be the first to mention a salary number because?" },
+          options: { ar: ["غير مهذب", "أول رقم يُذكر يصير نقطة الأساس للتفاوض", "يطوّل وقت المقابلة", "لا يوجد سبب"], en: ["It's impolite", "The first number becomes the anchor point", "It lengthens the interview", "No real reason"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "الأفضل عند ذكر الراتب المتوقع؟", en: "When stating expected salary, it's best to?" },
+          options: { ar: ["رقم ثابت واحد", "مدى مبني على بحث حقيقي", "رفض الإجابة", "رقم عشوائي"], en: ["Give one fixed number", "Give a range based on real research", "Refuse to answer", "Give a random number"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "تقليل راتبك المتوقع خوفاً من الرفض تصرف؟", en: "Lowballing your expected salary out of fear of rejection is?" },
+          options: { ar: ["آمن دايماً", "بيخسّرك فلوس حقيقية على المدى الطويل", "أفضل استراتيجية", "لا يؤثر"], en: ["Always safe", "Costs you real money long-term", "The best strategy", "Has no effect"] },
+          correct: 1,
+        },
+      ],
+    },
+    {
+      id: "q5",
+      title: { ar: "يوم المقابلة", en: "Interview Day" },
+      questions: [
+        {
+          q: { ar: "تقنية (4-4-4) بتُستخدم لـ؟", en: "The \"4-4-4\" technique is used for?" },
+          options: { ar: ["حفظ الإجابات", "تهدئة القلق قبل المقابلة", "حساب الراتب", "تنظيم الوقت"], en: ["Memorizing answers", "Calming pre-interview anxiety", "Calculating salary", "Time management"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "في المقابلات الأونلاين، يفضّل النظر إلى؟", en: "In online interviews, it's best to look at?" },
+          options: { ar: ["الشاشة", "الكاميرا", "الهاتف", "الأوراق"], en: ["The screen", "The camera", "Your phone", "Notes on paper"] },
+          correct: 1,
+        },
+        {
+          q: { ar: "قول (لا، معنديش أسئلة) في نهاية المقابلة يُعتبر؟", en: "Saying \"No, I have no questions\" at the end is considered?" },
+          options: { ar: ["خيار آمن ومحايد دايماً", "فرصة ضايعة لإظهار الاهتمام", "الأدب المطلوب", "لا فرق"], en: ["Always a safe neutral choice", "A missed chance to show interest", "Required politeness", "No difference"] },
+          correct: 1,
+        },
+      ],
+    },
+  ];
+
+  function qLang(){ return activeArDialect === 'en' ? 'en' : 'ar'; }
+
+  function getPassedQuizzes(){
+    try{ return JSON.parse(localStorage.getItem('jahzny_passed_quizzes') || '[]'); }
+    catch(e){ return []; }
+  }
+  function markQuizPassed(id){
+    const list = getPassedQuizzes();
+    if(!list.includes(id)){
+      list.push(id);
+      localStorage.setItem('jahzny_passed_quizzes', JSON.stringify(list));
+    }
+  }
+  function allLessonsDone(){
+    return LESSON_ORDER.every(id => getCompleted().includes(id));
+  }
+
+  function renderQuizList(){
+    const container = document.getElementById('quiz-list');
+    container.innerHTML = '';
+    const passed = getPassedQuizzes();
+    const lang = qLang();
+    let priorPassed = true;
+
+    QUIZZES.forEach(quiz=>{
+      const isPassed = passed.includes(quiz.id);
+      const wrap = document.createElement('div');
+      wrap.className = 'lesson-wrap';
+      wrap.style.marginBottom = '12px';
+
+      const row = document.createElement('div');
+      row.className = 'lesson';
+      const left = document.createElement('div');
+      left.className = 'lesson-left';
+      if(isPassed){
+        const check = document.createElement('span');
+        check.className = 'lesson-check';
+        check.textContent = '✓';
+        left.appendChild(check);
+      }
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'lesson-name';
+      nameSpan.textContent = quiz.title[lang];
+      left.appendChild(nameSpan);
+      row.appendChild(left);
+
+      const statusSpan = document.createElement('span');
+      statusSpan.className = 'lesson-status' + (isPassed ? ' available' : '');
+
+      const body = document.createElement('div');
+      body.className = 'quiz-body';
+
+      if(!priorPassed){
+        statusSpan.textContent = translations[activeArDialect].quiz_locked || translations.ar.quiz_locked;
+        row.style.opacity = '0.55';
+        row.style.cursor = 'not-allowed';
+      } else if(isPassed){
+        statusSpan.textContent = translations[activeArDialect].quiz_passed || translations.ar.quiz_passed;
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', ()=> body.classList.toggle('open'));
+      } else {
+        statusSpan.textContent = translations[activeArDialect].quiz_start || translations.ar.quiz_start;
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', ()=>{
+          body.classList.toggle('open');
+          if(body.classList.contains('open') && !body.dataset.built){
+            buildQuizFlow(body, quiz);
+            body.dataset.built = '1';
+          }
+        });
+      }
+
+      row.appendChild(statusSpan);
+      wrap.appendChild(row);
+      wrap.appendChild(body);
+      container.appendChild(wrap);
+
+      priorPassed = isPassed;
+    });
+  }
+
+  function buildQuizFlow(body, quiz){
+    const lang = qLang();
+    let qIndex = 0;
+    let selected = null;
+    let correctCount = 0;
+
+    function renderQuestion(){
+      selected = null;
+      const q = quiz.questions[qIndex];
+      body.innerHTML = '';
+
+      const progress = document.createElement('div');
+      progress.className = 'quiz-progress';
+      progress.textContent = `${qIndex + 1} / ${quiz.questions.length}`;
+      body.appendChild(progress);
+
+      const qEl = document.createElement('div');
+      qEl.className = 'quiz-question';
+      qEl.textContent = q.q[lang];
+      body.appendChild(qEl);
+
+      const optsWrap = document.createElement('div');
+      optsWrap.className = 'quiz-options';
+      q.options[lang].forEach((opt, i)=>{
+        const optEl = document.createElement('div');
+        optEl.className = 'quiz-option';
+        optEl.textContent = opt;
+        optEl.addEventListener('click', ()=>{
+          selected = i;
+          optsWrap.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+          optEl.classList.add('selected');
+          nextBtn.disabled = false;
+        });
+        optsWrap.appendChild(optEl);
+      });
+      body.appendChild(optsWrap);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'quiz-next-btn';
+      nextBtn.disabled = true;
+      const isLast = qIndex === quiz.questions.length - 1;
+      nextBtn.textContent = isLast
+        ? (translations[activeArDialect].quiz_finish || translations.ar.quiz_finish)
+        : (translations[activeArDialect].quiz_next || translations.ar.quiz_next);
+      nextBtn.addEventListener('click', ()=>{
+        if(selected === q.correct) correctCount++;
+        if(isLast){
+          renderResult();
+        } else {
+          qIndex++;
+          renderQuestion();
+        }
+      });
+      body.appendChild(nextBtn);
+    }
+
+    function renderResult(){
+      const score = correctCount / quiz.questions.length;
+      const passedNow = score >= PASS_THRESHOLD;
+      body.innerHTML = '';
+
+      const result = document.createElement('div');
+      result.className = 'quiz-result';
+
+      const icon = document.createElement('div');
+      icon.className = 'quiz-result-icon';
+      icon.textContent = passedNow ? '✅' : '❌';
+      result.appendChild(icon);
+
+      const title = document.createElement('div');
+      title.className = 'quiz-result-title';
+      title.textContent = passedNow
+        ? (translations[activeArDialect].quiz_pass_title || translations.ar.quiz_pass_title)
+        : (translations[activeArDialect].quiz_fail_title || translations.ar.quiz_fail_title);
+      result.appendChild(title);
+
+      const scoreEl = document.createElement('div');
+      scoreEl.className = 'quiz-result-score';
+      scoreEl.textContent = `${Math.round(score * 100)}%`;
+      result.appendChild(scoreEl);
+
+      const btn = document.createElement('button');
+      if(passedNow){
+        btn.className = 'quiz-next-btn';
+        btn.textContent = translations[activeArDialect].quiz_continue || translations.ar.quiz_continue;
+        btn.addEventListener('click', ()=>{
+          markQuizPassed(quiz.id);
+          renderQuizList();
+          checkCertificateUnlock();
+        });
+      } else {
+        btn.className = 'quiz-retry-btn';
+        btn.textContent = translations[activeArDialect].quiz_retry || translations.ar.quiz_retry;
+        btn.addEventListener('click', ()=>{
+          qIndex = 0;
+          correctCount = 0;
+          renderQuestion();
+        });
+      }
+      result.appendChild(btn);
+      body.appendChild(result);
+    }
+
+    renderQuestion();
+  }
+
+  function checkQuizzesUnlock(){
+    if(allLessonsDone()){
+      document.getElementById('quizzes-section').style.display = 'block';
+      renderQuizList();
+      checkCertificateUnlock();
+    }
+  }
+
+  function checkCertificateUnlock(){
+    const passed = getPassedQuizzes();
+    if(QUIZZES.every(q => passed.includes(q.id))){
+      document.getElementById('certificate-section').style.display = 'block';
+      const savedName = localStorage.getItem('jahzny_cert_name');
+      if(savedName) document.getElementById('cert-name').value = savedName;
+    }
+  }
+
+  function handleDownloadClick(){
+    const nameInput = document.getElementById('cert-name');
+    const name = nameInput.value.trim();
+    if(!name) return;
+
+    const savedName = localStorage.getItem('jahzny_cert_name');
+    const editUsed = localStorage.getItem('jahzny_cert_edit_used') === '1';
+    const t = translations[activeArDialect] || translations.ar;
+    const box = document.getElementById('cert-confirm-box');
+    const textEl = document.getElementById('cert-confirm-text');
+    const noteEl = document.getElementById('cert-edit-note');
+    noteEl.textContent = '';
+
+    const isEdit = savedName && name !== savedName;
+
+    if(isEdit && editUsed){
+      // No edits left — force the original name and explain why
+      nameInput.value = savedName;
+      noteEl.textContent = `${t.cert_edit_locked} "${savedName}"`;
+      box.classList.remove('open');
+      return;
+    }
+
+    box.dataset.pendingName = name;
+    box.dataset.isEdit = isEdit ? '1' : '0';
+
+    if(isEdit){
+      textEl.innerHTML = `${t.cert_confirm_edit} <span class="cert-confirm-name">"${name}"</span>.<br>${t.cert_edit_warning}`;
+    } else {
+      textEl.innerHTML = `${t.cert_confirm_first} <span class="cert-confirm-name">"${name}"</span>`;
+    }
+    box.classList.add('open');
+  }
+
+  function cancelConfirm(){
+    document.getElementById('cert-confirm-box').classList.remove('open');
+  }
+
+  function confirmAndDownload(){
+    const box = document.getElementById('cert-confirm-box');
+    const name = box.dataset.pendingName;
+    const isEdit = box.dataset.isEdit === '1';
+
+    localStorage.setItem('jahzny_cert_name', name);
+    if(isEdit) localStorage.setItem('jahzny_cert_edit_used', '1');
+
+    box.classList.remove('open');
+    printCertificate(name);
+  }
+
+  function printCertificate(name){
+    let certId = localStorage.getItem('jahzny_cert_id');
+    if(!certId){
+      certId = 'JHZ-' + Math.random().toString(36).slice(2, 10).toUpperCase();
+      localStorage.setItem('jahzny_cert_id', certId);
+    }
+
+    document.getElementById('cert-name-display').textContent = name;
+    document.getElementById('cert-date-display').textContent =
+      'Date  ' + new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('cert-id-display').textContent = 'Certificate ID  ' + certId;
+
+    document.getElementById('print-certificate').style.display = 'block';
+    window.print();
+    document.getElementById('print-certificate').style.display = 'none';
+  }
+
+  checkQuizzesUnlock();
 
   function generateAccessCode(email){
     const str = email.toLowerCase().trim() + ACCESS_SECRET;
@@ -427,6 +975,8 @@
     const code = document.getElementById('pw').value.trim().toUpperCase();
     const expected = generateAccessCode(email);
     if(email && code === expected){
+      localStorage.setItem('jahzny_authed', '1');
+      localStorage.setItem('jahzny_authed_email', email);
       document.getElementById('gate').style.display = 'none';
       document.getElementById('course').style.display = 'block';
     } else {
@@ -438,8 +988,14 @@
     if(e.key === 'Enter') checkPassword();
   });
 
-  // Auto-fill + auto-check if the link came with ?email=...&code=... from the welcome email
+  // If already verified before (even after a refresh), skip the gate entirely.
+  // Otherwise fall back to auto-filling from the ?email=...&code=... link in the welcome email.
   (function autoFillFromUrl(){
+    if(localStorage.getItem('jahzny_authed') === '1'){
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('course').style.display = 'block';
+      return;
+    }
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email');
     const code = params.get('code');
