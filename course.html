@@ -70,7 +70,23 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:12px 14px; background:var(--navy-900); border-radius:10px; margin-bottom:8px;
   }
-  .lesson:last-child{margin-bottom:0;}
+  .lesson-wrap:last-child .lesson{margin-bottom:0;}
+  .lesson-wrap.has-video .lesson{cursor:pointer; border:1px solid rgba(47,160,147,0.35);}
+  .lesson-wrap.has-video .lesson:hover{border-color:rgba(47,160,147,0.7);}
+  .lesson-status.available{
+    background:rgba(47,160,147,0.18); color:var(--emerald); font-weight:700;
+  }
+  .lesson-video{
+    display:none; margin:-2px 0 8px 0; border-radius:10px; overflow:hidden;
+  }
+  .lesson-video.open{display:block;}
+  .lesson-video video{width:100%; display:block; background:#000;}
+  .lesson-left{display:flex; align-items:center; gap:10px;}
+  .lesson-check{
+    width:22px; height:22px; border-radius:50%; background:var(--emerald);
+    color:#0A121D; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:900; flex-shrink:0;
+  }
   .lesson-name{font-size:14px; color:var(--ink);}
   .lesson-status{
     font-size:12px; color:var(--ink-dim); background:rgba(255,255,255,0.06);
@@ -87,7 +103,8 @@
     border-radius:14px; padding:20px; margin-bottom:24px;
   }
   .intro-video video{
-    width:100%; border-radius:10px; display:block; background:#000;
+    width:100%; max-height:70vh; border-radius:10px; display:block;
+    background:#000; margin:0 auto; object-fit:contain;
   }
   .intro-video-title{
     font-size:15px; font-weight:700; color:var(--gold-300); margin-bottom:12px;
@@ -133,30 +150,51 @@
 
   <div class="module">
     <div class="module-title"><span class="module-num">1</span> <span data-t="m1_title">الأساسيات</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m1_l1">1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل</span><span class="lesson-status" data-t="soon">قريباً</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m1_l2">1.2 - الانطباع الأول</span><span class="lesson-status" data-t="soon">قريباً</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m1_l3">1.3 - تجهيز قصتك (Elevator Pitch)</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson-wrap" data-lesson="1-1">
+      <div class="lesson"><span class="lesson-name" data-t="m1_l1">1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
+    <div class="lesson-wrap" data-lesson="1-2">
+      <div class="lesson"><span class="lesson-name" data-t="m1_l2">1.2 - الانطباع الأول</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
+    <div class="lesson-wrap" data-lesson="1-3">
+      <div class="lesson"><span class="lesson-name" data-t="m1_l3">1.3 - تجهيز قصتك (Elevator Pitch)</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
   </div>
 
   <div class="module">
     <div class="module-title"><span class="module-num">2</span> <span data-t="m2_title">الأسئلة السلوكية</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m2_l1">STAR Method + أمثلة تطبيقية</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson-wrap" data-lesson="2-1">
+      <div class="lesson"><span class="lesson-name" data-t="m2_l1">STAR Method + أمثلة تطبيقية</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
   </div>
 
   <div class="module">
     <div class="module-title"><span class="module-num">3</span> <span data-t="m3_title">أسئلة مجالك</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m3_l1">Sales / HR / Marketing / Customer Service</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson-wrap" data-lesson="3-1">
+      <div class="lesson"><span class="lesson-name" data-t="m3_l1">Sales / HR / Marketing / Customer Service</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
     <div class="track-note" data-t="m3_note">هتقدر تختار مسارك بمجرد ما الفيديوهات تتفعّل.</div>
   </div>
 
   <div class="module">
     <div class="module-title"><span class="module-num">4</span> <span data-t="m4_title">التفاوض على الراتب</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m4_l1">إزاي تتفاوض من غير ما تبان طماع</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson-wrap" data-lesson="4-1">
+      <div class="lesson"><span class="lesson-name" data-t="m4_l1">إزاي تتفاوض من غير ما تبان طماع</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
   </div>
 
   <div class="module">
     <div class="module-title"><span class="module-num">5</span> <span data-t="m5_title">يوم المقابلة</span></div>
-    <div class="lesson"><span class="lesson-name" data-t="m5_l1">لغة الجسد، التنفس، الأسئلة اللي تسألها</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson-wrap" data-lesson="5-1">
+      <div class="lesson"><span class="lesson-name" data-t="m5_l1">لغة الجسد، التنفس، الأسئلة اللي تسألها</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+      <div class="lesson-video"></div>
+    </div>
   </div>
 
   <div class="footer-note">
@@ -265,6 +303,80 @@
 
   activeArDialect = detectInitialLang();
   applyTranslations(activeArDialect);
+
+  // ---- Available videos config ----
+  // To add a new lesson video later: just add one line here, e.g. "1-2": "lesson-1-2.mp4"
+  const AVAILABLE_VIDEOS = {
+    "1-1": "lesson-1-1.mp4",
+  };
+
+  const availableLabel = { ar:"شاهد الدرس", gulf:"شاهد الدرس", en:"Watch lesson" };
+  const doneLabel = { ar:"خلصت ✓", gulf:"خلصت ✓", en:"Completed ✓" };
+
+  function getCompleted(){
+    try{ return JSON.parse(localStorage.getItem('jahzny_completed_lessons') || '[]'); }
+    catch(e){ return []; }
+  }
+  function markCompleted(id){
+    const list = getCompleted();
+    if(!list.includes(id)){
+      list.push(id);
+      localStorage.setItem('jahzny_completed_lessons', JSON.stringify(list));
+    }
+  }
+
+  function addCheckBadge(wrap){
+    const nameEl = wrap.querySelector('.lesson-name');
+    if(nameEl.parentElement.classList.contains('lesson-left')) return; // already added
+    const leftWrap = document.createElement('div');
+    leftWrap.className = 'lesson-left';
+    nameEl.parentNode.insertBefore(leftWrap, nameEl);
+    const check = document.createElement('span');
+    check.className = 'lesson-check';
+    check.textContent = '✓';
+    leftWrap.appendChild(check);
+    leftWrap.appendChild(nameEl);
+  }
+
+  function setupLessonVideos(){
+    const completed = getCompleted();
+
+    document.querySelectorAll('.lesson-wrap').forEach(wrap=>{
+      const id = wrap.getAttribute('data-lesson');
+      const videoFile = AVAILABLE_VIDEOS[id];
+      if(!videoFile) return;
+
+      wrap.classList.add('has-video');
+      const statusEl = wrap.querySelector('.lesson-status');
+      statusEl.removeAttribute('data-t');
+
+      const isDone = completed.includes(id);
+      if(isDone){
+        statusEl.classList.add('available');
+        statusEl.textContent = doneLabel[activeArDialect] || doneLabel.ar;
+        addCheckBadge(wrap);
+      } else {
+        statusEl.textContent = availableLabel[activeArDialect] || availableLabel.ar;
+      }
+
+      const videoSlot = wrap.querySelector('.lesson-video');
+      videoSlot.innerHTML = `<video controls preload="metadata"><source src="${videoFile}" type="video/mp4"></video>`;
+      const videoEl = videoSlot.querySelector('video');
+
+      videoEl.addEventListener('ended', ()=>{
+        markCompleted(id);
+        statusEl.classList.add('available');
+        statusEl.textContent = doneLabel[activeArDialect] || doneLabel.ar;
+        addCheckBadge(wrap);
+      });
+
+      wrap.querySelector('.lesson').addEventListener('click', ()=>{
+        videoSlot.classList.toggle('open');
+      });
+    });
+  }
+
+  setupLessonVideos();
 
   function generateAccessCode(email){
     const str = email.toLowerCase().trim() + ACCESS_SECRET;
