@@ -85,10 +85,11 @@
 <div id="gate">
   <div class="gate-card">
     <div class="gate-logo display">جهزني</div>
-    <div class="gate-sub">أدخل كلمة السر اللي وصلتك في الإيميل</div>
-    <input type="password" id="pw" class="gate-input" placeholder="كلمة السر" autocomplete="off">
+    <div class="gate-sub">أدخل إيميلك والكود اللي وصلك في الإيميل</div>
+    <input type="email" id="email" class="gate-input" placeholder="إيميلك" autocomplete="off">
+    <input type="text" id="pw" class="gate-input" placeholder="كود الدخول" autocomplete="off" style="text-transform:uppercase;">
     <button class="gate-btn" onclick="checkPassword()">دخول</button>
-    <div class="gate-error" id="err">كلمة السر غلط، جرب تاني.</div>
+    <div class="gate-error" id="err">الإيميل أو الكود مش مظبوط، تأكد وجرب تاني.</div>
   </div>
 </div>
 
@@ -133,11 +134,24 @@
 </div>
 
 <script>
-  const COURSE_PASSWORD = "jahzny2026";
+  const ACCESS_SECRET = "JHZ2026SECRET"; // must match the value used in the Pipedream email code
+
+  function generateAccessCode(email){
+    const str = email.toLowerCase().trim() + ACCESS_SECRET;
+    let hash = 0;
+    for(let i = 0; i < str.length; i++){
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
+    }
+    hash = Math.abs(hash);
+    return hash.toString(36).toUpperCase().padStart(6,'0').slice(0,6);
+  }
 
   function checkPassword(){
-    const input = document.getElementById('pw').value.trim();
-    if(input === COURSE_PASSWORD){
+    const email = document.getElementById('email').value.trim();
+    const code = document.getElementById('pw').value.trim().toUpperCase();
+    const expected = generateAccessCode(email);
+    if(email && code === expected){
       document.getElementById('gate').style.display = 'none';
       document.getElementById('course').style.display = 'block';
     } else {
@@ -148,6 +162,18 @@
   document.getElementById('pw').addEventListener('keydown', function(e){
     if(e.key === 'Enter') checkPassword();
   });
+
+  // Auto-fill + auto-check if the link came with ?email=...&code=... from the welcome email
+  (function autoFillFromUrl(){
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    const code = params.get('code');
+    if(email && code){
+      document.getElementById('email').value = email;
+      document.getElementById('pw').value = code;
+      checkPassword();
+    }
+  })();
 </script>
 
 </body>
