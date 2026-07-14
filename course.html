@@ -87,6 +87,8 @@
     color:#0A121D; display:flex; align-items:center; justify-content:center;
     font-size:13px; font-weight:900; flex-shrink:0;
   }
+  .lesson-wrap.locked .lesson{opacity:0.55; cursor:not-allowed;}
+  .lesson-wrap.locked .lesson-status{background:rgba(255,255,255,0.06); color:var(--ink-dim);}
   .lesson-name{font-size:14px; color:var(--ink);}
   .lesson-status{
     font-size:12px; color:var(--ink-dim); background:rgba(255,255,255,0.06);
@@ -310,10 +312,16 @@
     "1-1": "lesson-1-1.mp4",
     "1-2": "lesson-1-2.mp4",
     "1-3": "lesson-1-3.mp4",
+    "2-1": "lesson-2-1.mp4",
   };
+
+  // The fixed order lessons must be completed in — matches the data-lesson
+  // attributes already on the page, top to bottom.
+  const LESSON_ORDER = ["1-1", "1-2", "1-3", "2-1", "3-1", "4-1", "5-1"];
 
   const availableLabel = { ar:"شاهد الدرس", gulf:"شاهد الدرس", en:"Watch lesson" };
   const doneLabel = { ar:"خلصت ✓", gulf:"خلصت ✓", en:"Completed ✓" };
+  const lockedLabel = { ar:"🔒 خلّص اللي قبله الأول", gulf:"🔒 خلّص اللي قبله أول", en:"🔒 Finish the previous lesson first" };
 
   function getCompleted(){
     try{ return JSON.parse(localStorage.getItem('jahzny_completed_lessons') || '[]'); }
@@ -329,7 +337,7 @@
 
   function addCheckBadge(wrap){
     const nameEl = wrap.querySelector('.lesson-name');
-    if(nameEl.parentElement.classList.contains('lesson-left')) return; // already added
+    if(nameEl.parentElement.classList.contains('lesson-left')) return;
     const leftWrap = document.createElement('div');
     leftWrap.className = 'lesson-left';
     nameEl.parentNode.insertBefore(leftWrap, nameEl);
@@ -342,17 +350,36 @@
 
   function setupLessonVideos(){
     const completed = getCompleted();
+    let priorAllCompleted = true; // whether every lesson before this one (in order) is completed
 
-    document.querySelectorAll('.lesson-wrap').forEach(wrap=>{
-      const id = wrap.getAttribute('data-lesson');
+    LESSON_ORDER.forEach(id=>{
+      const wrap = document.querySelector(`.lesson-wrap[data-lesson="${id}"]`);
+      if(!wrap) return;
+
       const videoFile = AVAILABLE_VIDEOS[id];
-      if(!videoFile) return;
-
-      wrap.classList.add('has-video');
       const statusEl = wrap.querySelector('.lesson-status');
+      const isDone = completed.includes(id);
+
+      if(!videoFile){
+        // no video yet at all — stays "coming soon", chain breaks here
+        priorAllCompleted = false;
+        return;
+      }
+
+      if(!priorAllCompleted){
+        // locked: video exists, but earlier lessons aren't finished yet
+        wrap.classList.add('locked');
+        wrap.classList.remove('has-video');
+        statusEl.removeAttribute('data-t');
+        statusEl.textContent = lockedLabel[activeArDialect] || lockedLabel.ar;
+        return;
+      }
+
+      // unlocked
+      wrap.classList.remove('locked');
+      wrap.classList.add('has-video');
       statusEl.removeAttribute('data-t');
 
-      const isDone = completed.includes(id);
       if(isDone){
         statusEl.classList.add('available');
         statusEl.textContent = doneLabel[activeArDialect] || doneLabel.ar;
@@ -367,14 +394,17 @@
 
       videoEl.addEventListener('ended', ()=>{
         markCompleted(id);
-        statusEl.classList.add('available');
-        statusEl.textContent = doneLabel[activeArDialect] || doneLabel.ar;
-        addCheckBadge(wrap);
+        setupLessonVideos(); // re-run to unlock the next lesson immediately
       });
 
-      wrap.querySelector('.lesson').addEventListener('click', ()=>{
+      const lessonRow = wrap.querySelector('.lesson');
+      const newRow = lessonRow.cloneNode(true); // clear any old click listeners before re-binding
+      lessonRow.parentNode.replaceChild(newRow, lessonRow);
+      newRow.addEventListener('click', ()=>{
         videoSlot.classList.toggle('open');
       });
+
+      priorAllCompleted = isDone; // next lesson only unlocks if THIS one is done
     });
   }
 
