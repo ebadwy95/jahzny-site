@@ -40,6 +40,15 @@
     color:var(--navy-950); font-weight:800; font-size:15px; cursor:pointer;
   }
   .gate-error{color:#E88B8B; font-size:13px; margin-top:12px; display:none;}
+  .lang-toggle{
+    display:inline-flex; border:1px solid rgba(201,162,39,0.35); border-radius:999px; overflow:hidden;
+    font-size:12px; margin-bottom:20px;
+  }
+  .lang-toggle button{
+    padding:6px 14px; background:transparent; color:var(--ink-dim); border:none; cursor:pointer;
+    font-family:inherit;
+  }
+  .lang-toggle button.active{background:var(--gold-500); color:var(--navy-950); font-weight:700;}
 
   /* ---- Course screen ---- */
   #course{display:none; max-width:720px; margin:0 auto; padding:32px 20px 80px;}
@@ -84,57 +93,157 @@
 
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo display">جهزني</div>
-    <div class="gate-sub">أدخل إيميلك والكود اللي وصلك في الإيميل</div>
-    <input type="email" id="email" class="gate-input" placeholder="إيميلك" autocomplete="off">
-    <input type="text" id="pw" class="gate-input" placeholder="كود الدخول" autocomplete="off" style="text-transform:uppercase;">
-    <button class="gate-btn" onclick="checkPassword()">دخول</button>
-    <div class="gate-error" id="err">الإيميل أو الكود مش مظبوط، تأكد وجرب تاني.</div>
+    <div class="lang-toggle">
+      <button data-lang="ar-auto" class="active">AR</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <div class="gate-logo display" data-t="logo_text">جهزني</div>
+    <div class="gate-sub" data-t="gate_sub">أدخل إيميلك والكود اللي وصلك في الإيميل</div>
+    <input type="email" id="email" class="gate-input" data-t-placeholder="gate_email_ph" placeholder="إيميلك" autocomplete="off">
+    <input type="text" id="pw" class="gate-input" data-t-placeholder="gate_code_ph" placeholder="كود الدخول" autocomplete="off" style="text-transform:uppercase;">
+    <button class="gate-btn" onclick="checkPassword()" data-t="gate_btn">دخول</button>
+    <div class="gate-error" id="err" data-t="gate_err">الإيميل أو الكود مش مظبوط، تأكد وجرب تاني.</div>
   </div>
 </div>
 
 <div id="course">
   <div class="course-header">
-    <div class="logo display">جهزني</div>
-    <h1 class="display">كورسك جاهز 🎯</h1>
-    <p>الفيديوهات بتتحط تباعاً - هتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.</p>
+    <div class="logo display" data-t="logo_text">جهزني</div>
+    <h1 class="display" data-t="course_title">كورسك جاهز 🎯</h1>
+    <p data-t="course_sub">الفيديوهات بتتحط تباعاً - هتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.</p>
   </div>
 
   <div class="module">
-    <div class="module-title"><span class="module-num">1</span> الأساسيات</div>
-    <div class="lesson"><span class="lesson-name">1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل</span><span class="lesson-status">قريباً</span></div>
-    <div class="lesson"><span class="lesson-name">1.2 - الانطباع الأول</span><span class="lesson-status">قريباً</span></div>
-    <div class="lesson"><span class="lesson-name">1.3 - تجهيز قصتك (Elevator Pitch)</span><span class="lesson-status">قريباً</span></div>
+    <div class="module-title"><span class="module-num">1</span> <span data-t="m1_title">الأساسيات</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m1_l1">1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m1_l2">1.2 - الانطباع الأول</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m1_l3">1.3 - تجهيز قصتك (Elevator Pitch)</span><span class="lesson-status" data-t="soon">قريباً</span></div>
   </div>
 
   <div class="module">
-    <div class="module-title"><span class="module-num">2</span> الأسئلة السلوكية</div>
-    <div class="lesson"><span class="lesson-name">STAR Method + أمثلة تطبيقية</span><span class="lesson-status">قريباً</span></div>
+    <div class="module-title"><span class="module-num">2</span> <span data-t="m2_title">الأسئلة السلوكية</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m2_l1">STAR Method + أمثلة تطبيقية</span><span class="lesson-status" data-t="soon">قريباً</span></div>
   </div>
 
   <div class="module">
-    <div class="module-title"><span class="module-num">3</span> أسئلة مجالك</div>
-    <div class="lesson"><span class="lesson-name">Sales / HR / Marketing / Customer Service</span><span class="lesson-status">قريباً</span></div>
-    <div class="track-note">هتقدر تختار مسارك بمجرد ما الفيديوهات تتفعّل.</div>
+    <div class="module-title"><span class="module-num">3</span> <span data-t="m3_title">أسئلة مجالك</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m3_l1">Sales / HR / Marketing / Customer Service</span><span class="lesson-status" data-t="soon">قريباً</span></div>
+    <div class="track-note" data-t="m3_note">هتقدر تختار مسارك بمجرد ما الفيديوهات تتفعّل.</div>
   </div>
 
   <div class="module">
-    <div class="module-title"><span class="module-num">4</span> التفاوض على الراتب</div>
-    <div class="lesson"><span class="lesson-name">إزاي تتفاوض من غير ما تبان طماع</span><span class="lesson-status">قريباً</span></div>
+    <div class="module-title"><span class="module-num">4</span> <span data-t="m4_title">التفاوض على الراتب</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m4_l1">إزاي تتفاوض من غير ما تبان طماع</span><span class="lesson-status" data-t="soon">قريباً</span></div>
   </div>
 
   <div class="module">
-    <div class="module-title"><span class="module-num">5</span> يوم المقابلة</div>
-    <div class="lesson"><span class="lesson-name">لغة الجسد، التنفس، الأسئلة اللي تسألها</span><span class="lesson-status">قريباً</span></div>
+    <div class="module-title"><span class="module-num">5</span> <span data-t="m5_title">يوم المقابلة</span></div>
+    <div class="lesson"><span class="lesson-name" data-t="m5_l1">لغة الجسد، التنفس، الأسئلة اللي تسألها</span><span class="lesson-status" data-t="soon">قريباً</span></div>
   </div>
 
   <div class="footer-note">
-    عندك سؤال أو مشكلة؟ ابعتلنا على <a href="mailto:hello@jahzny.com">hello@jahzny.com</a>
+    <span data-t="footer_help">عندك سؤال أو مشكلة؟ ابعتلنا على</span> <a href="mailto:hello@jahzny.com">hello@jahzny.com</a>
   </div>
 </div>
 
 <script>
   const ACCESS_SECRET = "JHZ2026SECRET"; // must match the value used in the Pipedream email code
+
+  const translations = {
+    ar: {
+      logo_text:"جهزني",
+      gate_sub:"أدخل إيميلك والكود اللي وصلك في الإيميل",
+      gate_email_ph:"إيميلك", gate_code_ph:"كود الدخول", gate_btn:"دخول",
+      gate_err:"الإيميل أو الكود مش مظبوط، تأكد وجرب تاني.",
+      course_title:"كورسك جاهز 🎯",
+      course_sub:"الفيديوهات بتتحط تباعاً - هتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.",
+      m1_title:"الأساسيات",
+      m1_l1:"1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل",
+      m1_l2:"1.2 - الانطباع الأول",
+      m1_l3:"1.3 - تجهيز قصتك (Elevator Pitch)",
+      m2_title:"الأسئلة السلوكية", m2_l1:"STAR Method + أمثلة تطبيقية",
+      m3_title:"أسئلة مجالك", m3_l1:"Sales / HR / Marketing / Customer Service",
+      m3_note:"هتقدر تختار مسارك بمجرد ما الفيديوهات تتفعّل.",
+      m4_title:"التفاوض على الراتب", m4_l1:"إزاي تتفاوض من غير ما تبان طماع",
+      m5_title:"يوم المقابلة", m5_l1:"لغة الجسد، التنفس، الأسئلة اللي تسألها",
+      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ ابعتلنا على"
+    },
+    gulf: {
+      logo_text:"جهزني",
+      gate_sub:"أدخل إيميلك والكود اللي وصلك بالإيميل",
+      gate_email_ph:"إيميلك", gate_code_ph:"كود الدخول", gate_btn:"دخول",
+      gate_err:"الإيميل أو الكود مو مظبوط، تأكد وجرب مرة ثانية.",
+      course_title:"كورسك جاهز 🎯",
+      course_sub:"الفيديوهات بتنزل تباعاً - بتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.",
+      m1_title:"الأساسيات",
+      m1_l1:"1.1 - كيف تفهم وش اللي يدور في راس اللي يقابلك",
+      m1_l2:"1.2 - الانطباع الأول",
+      m1_l3:"1.3 - تجهيز قصتك (Elevator Pitch)",
+      m2_title:"الأسئلة السلوكية", m2_l1:"STAR Method + أمثلة تطبيقية",
+      m3_title:"أسئلة مجالك", m3_l1:"Sales / HR / Marketing / Customer Service",
+      m3_note:"بتقدر تختار مسارك بمجرد ما الفيديوهات تتفعّل.",
+      m4_title:"التفاوض على الراتب", m4_l1:"كيف تتفاوض من غير ما تبان طماع",
+      m5_title:"يوم المقابلة", m5_l1:"لغة الجسد، التنفس، الأسئلة اللي تسألها",
+      soon:"قريباً", footer_help:"عندك سؤال أو مشكلة؟ تواصل معنا على"
+    },
+    en: {
+      logo_text:"Jahzny",
+      gate_sub:"Enter your email and the code from your email",
+      gate_email_ph:"Your email", gate_code_ph:"Access code", gate_btn:"Enter",
+      gate_err:"Email or code is incorrect, please try again.",
+      course_title:"Your course is ready 🎯",
+      course_sub:"Videos are rolling out gradually - you'll get an email as each part unlocks.",
+      m1_title:"Foundations",
+      m1_l1:"1.1 - Understanding what the interviewer is thinking",
+      m1_l2:"1.2 - The first impression",
+      m1_l3:"1.3 - Crafting your elevator pitch",
+      m2_title:"Behavioral Questions", m2_l1:"STAR Method + practical examples",
+      m3_title:"Questions for your field", m3_l1:"Sales / HR / Marketing / Customer Service",
+      m3_note:"You'll be able to pick your track once videos are live.",
+      m4_title:"Salary Negotiation", m4_l1:"How to negotiate without seeming greedy",
+      m5_title:"Interview Day", m5_l1:"Body language, breathing, questions to ask",
+      soon:"Coming soon", footer_help:"Questions or issues? Reach us at"
+    }
+  };
+
+  let activeArDialect = 'ar';
+
+  function applyTranslations(lang){
+    document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+    document.querySelectorAll('[data-t]').forEach(el=>{
+      const key = el.getAttribute('data-t');
+      if(translations[lang][key] !== undefined) el.textContent = translations[lang][key];
+    });
+    document.querySelectorAll('[data-t-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-t-placeholder');
+      if(translations[lang][key] !== undefined) el.placeholder = translations[lang][key];
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      const isArButton = b.dataset.lang === 'ar-auto';
+      const isArabic = (lang === 'ar' || lang === 'gulf');
+      b.classList.toggle('active', isArButton ? isArabic : b.dataset.lang === lang);
+    });
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.dataset.lang === 'ar-auto' ? activeArDialect : btn.dataset.lang;
+      applyTranslations(target);
+    });
+  });
+
+  function detectInitialLang(){
+    try{
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const gulfZones = ['Asia/Riyadh','Asia/Kuwait','Asia/Dubai','Asia/Qatar','Asia/Bahrain','Asia/Muscat','Asia/Aden'];
+      if(gulfZones.includes(tz)) return 'gulf';
+      if(tz === 'Africa/Cairo') return 'ar';
+    }catch(e){}
+    return 'ar';
+  }
+
+  activeArDialect = detectInitialLang();
+  applyTranslations(activeArDialect);
 
   function generateAccessCode(email){
     const str = email.toLowerCase().trim() + ACCESS_SECRET;
