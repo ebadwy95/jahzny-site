@@ -82,6 +82,17 @@
     border-radius:10px; padding:14px 16px; font-size:13px; color:var(--ink-dim); margin-top:16px;
   }
 
+  .intro-video{
+    background:var(--navy-800); border:1px solid rgba(201,162,39,0.2);
+    border-radius:14px; padding:20px; margin-bottom:24px;
+  }
+  .intro-video video{
+    width:100%; border-radius:10px; display:block; background:#000;
+  }
+  .intro-video-title{
+    font-size:15px; font-weight:700; color:var(--gold-300); margin-bottom:12px;
+  }
+
   .footer-note{
     text-align:center; color:var(--ink-dim); font-size:13px; margin-top:32px;
     padding-top:24px; border-top:1px solid rgba(255,255,255,0.08);
@@ -111,6 +122,13 @@
     <div class="logo display" data-t="logo_text">جهزني</div>
     <h1 class="display" data-t="course_title">كورسك جاهز 🎯</h1>
     <p data-t="course_sub">الفيديوهات بتتحط تباعاً - هتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.</p>
+  </div>
+
+  <div class="intro-video">
+    <div class="intro-video-title" data-t="intro_title">🎬 فيديو تعريفي</div>
+    <video controls preload="metadata">
+      <source src="intro.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="module">
@@ -157,6 +175,7 @@
       gate_err:"الإيميل أو الكود مش مظبوط، تأكد وجرب تاني.",
       course_title:"كورسك جاهز 🎯",
       course_sub:"الفيديوهات بتتحط تباعاً - هتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.",
+      intro_title:"🎬 فيديو تعريفي",
       m1_title:"الأساسيات",
       m1_l1:"1.1 - إزاي تفهم اللي بيدور في دماغ المُقابِل",
       m1_l2:"1.2 - الانطباع الأول",
@@ -175,6 +194,7 @@
       gate_err:"الإيميل أو الكود مو مظبوط، تأكد وجرب مرة ثانية.",
       course_title:"كورسك جاهز 🎯",
       course_sub:"الفيديوهات بتنزل تباعاً - بتوصلك رسالة على إيميلك أول ما كل جزء يتفعّل.",
+      intro_title:"🎬 فيديو تعريفي",
       m1_title:"الأساسيات",
       m1_l1:"1.1 - كيف تفهم وش اللي يدور في راس اللي يقابلك",
       m1_l2:"1.2 - الانطباع الأول",
@@ -193,6 +213,7 @@
       gate_err:"Email or code is incorrect, please try again.",
       course_title:"Your course is ready 🎯",
       course_sub:"Videos are rolling out gradually - you'll get an email as each part unlocks.",
+      intro_title:"🎬 Introduction video",
       m1_title:"Foundations",
       m1_l1:"1.1 - Understanding what the interviewer is thinking",
       m1_l2:"1.2 - The first impression",
